@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //需求，输入性别 年龄 身高 体重 体脂率 目标体脂率  每周运动次数（活动因子矫正） 减脂周数
+    //输出，基础代谢量 总减脂量 总减脂热量 每周消耗热量 每天消耗热量 每餐消耗热量
+    let gender = prompt('请输入性别（男/女/瓜）');
+    let age = prompt('请输入年龄(岁)');
+    let height = prompt('请输入身高(cm)');
+    let weight = prompt('请输入体重（kg）');
+    let fatRate = prompt('请输入体脂率（%）');
+    let targetFatRate = prompt('请输入目标体脂率（%）');
+    let exerciseTime = prompt('请输入每周运动次数(次)');
+    let period = prompt('请输入减脂周期(周)');
+
+    let RMR;
+    if (gender === '男') {
+      RMR = (9.99 * weight) + (6.25 * height) - (4.92 * age) + 5;
+    } else if (gender === '女') {
+      RMR = (9.99 * weight) + (6.25 * height) - (4.92 * age) - 161;
+    } else {
+      alert('你是人？');
+    }
+    //每周运动次数
+    if (exerciseTime === `0`) {
+      RMR = RMR * 1.2;
+    } else if (exerciseTime >= '1' && exerciseTime <= '3') {
+      RMR = RMR * 1.375;
+    } else if (exerciseTime >= '4' && exerciseTime <= '5') {
+      RMR = RMR * 1.55;
+    } else if (exerciseTime >= '6' && exerciseTime <= '7') {
+      RMR = RMR * 1.725;
+    } else {
+      alert('你是人？');
+    }
+    document.write(`-------------------------------------------------------------------<br> `)
+    //基础代谢量
+    document.write(`基础代谢量为：${RMR}kcal/天<br>`)
+    //总减脂量
+    let totalFat = (weight * fatRate / 100) - (weight * targetFatRate / 100);
+    document.write(`总减脂量为：${totalFat}kg<br>`)
+    //总减脂热量
+    let totalFatCal = totalFat * 7700;
+    document.write(`总减脂热量为：${totalFatCal}kcal<br>`)
+    //每周消耗热量
+    let weekLyCal = totalFatCal / period;
+    document.write(`每周需要热量缺口为：${weekLyCal}kcal<br>`)
+    //每天消耗热量
+    let dayLyCal = weekLyCal / 7;
+    document.write(`每天需要热量缺口为：${dayLyCal}kcal<br>`)
+    //每餐消耗热量
+    let mealLyCal = dayLyCal / 3;
+    document.write(`每餐需要热量缺口为：${mealLyCal}kcal<br>`)
+    // 修正拼写错误
+    document.write(`-------------------------------------------------------------------<br> `)
+    //基础代谢量
+    document.write('<h1>Just Do It!</h1>')
+
+  </script>
+</body>
+
+</html>
